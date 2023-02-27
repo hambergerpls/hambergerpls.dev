@@ -13,9 +13,7 @@ body {
     padding: 0;
     min-height: 100vh;
     font-family: var(--font);
-    background: radial-gradient(ellipse at bottom, var(--bgColor) 0%, var(--bgColor2) 100%);
-    animation: 1s ease-out var(--delay) 1 transitionAnimation; /* duration/timing-function/delay/iterations/name */
-    animation-fill-mode: forwards;
+    background: var(--bgColor);
     background-repeat: no-repeat;
     background-size: cover;
     position: relative;
@@ -23,8 +21,8 @@ body {
 
 #profilePicture, #profilePicture img {
     position: relative;
-    width: 96px;
-    height: 96px;
+    width: auto;
+    height: 256px;
     display: block;
     margin: 40px auto 20px;
     border-radius: 50%;
@@ -33,7 +31,7 @@ body {
 
 #username {
     color: var(--accentColor);
-    font-size: 1rem;
+    font-size: 2rem;
     font-weight: bold;
     line-height: 1.25;
     display: block;
@@ -45,7 +43,7 @@ body {
 
 #description {
     color: var(--accentColor);
-    font-size: 1rem;
+    font-size: 2rem;
     display: block;
     font-family: var(--font);
     width: 100%;
@@ -53,25 +51,41 @@ body {
     text-decoration: none;
 }
 
-#links {
-    max-width: 675px;
-    width: auto;
+#content {
+    color: var(--accentColor);
+    font-size: 1.5rem;
     display: block;
+    font-family: var(--font);
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    text-decoration: none;
+}
+
+.hyperlink {
+    color: var(--accentColor);
+    font-family: var(--font);
+}
+
+#links {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 675px;
+    justify-content: space-evenly;
+    align-items: center;
+    align-content: space-around;
+    width: 100%;
     margin: 27px auto;
 }
 
 .link {
-    position: relative;
     background-color: transparent;
     color: var(--accentColor);
     border: solid var(--accentColor) 2px;
     border-radius: 10px;
     font-size: 1rem;
     text-align: center;
-    display: block;
-    margin-left: 10px;
-    margin-right: 10px;
-    margin-bottom: 10px;
     padding: 10px; /* 17px */
     text-decoration: none;
     -webkit-tap-highlight-color: transparent;
