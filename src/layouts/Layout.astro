@@ -1,0 +1,51 @@
+---
+import "../styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="description" content={description} />
+        <meta name="viewport" content="width=device-width" />
+        <link rel="icon" href="/favicon.ico" />
+        <meta name="generator" content={Astro.generator} />
+        <title>hambergerpls{title && ` | ${title}`}</title>
+    </head>
+    <body class="p-4 min-h-[100vh] max-w-[100vw] overflow-x-hidden">
+        <div class="navbar bg-base-100 justify-between">
+            <a href="/" class="link-animated text-xl" data-astro-prefetch>hambergerpls</a>
+            <ul class="menu menu-horizontal">
+                <li class="sm:tooltip [--placement:bottom]">
+                    <a href="/posts" class:list={["tooltip-toggle", { active: Astro.url.pathname === "/posts" } ]} aria-label="Posts Link" data-astro-prefetch><span class="icon-[tabler--writing] size-5"/><span class="sr-only md:not-sr-only">Writings</span></a>
+                    <span class="tooltip-content tooltip-shown:opacity-100 tooltip-shown:visible" role="tooltip">
+                        <span class="tooltip-body">Writings</span>
+                    </span>
+                </li>
+                <li class="sm:tooltip [--placement:bottom]">
+                    <a href="/projects" class:list={["tooltip-toggle", { active: Astro.url.pathname === "/projects" } ]} aria-label="Projects Link" data-astro-prefetch><span class="icon-[tabler--tool] size-5"/><span class="sr-only md:not-sr-only">Projects</span></a>
+                    <span class="tooltip-content tooltip-shown:opacity-100 tooltip-shown:visible" role="tooltip">
+                        <span class="tooltip-body">Projects</span>
+                    </span>
+                </li>
+                <li class="sm:tooltip [--placement:bottom]">
+                    <a href="/contact" class:list={["tooltip-toggle", { active: Astro.url.pathname === "/contact" } ]} aria-label="Contact Link" data-astro-prefetch><span class="icon-[tabler--message] size-5"/><span class="sr-only md:not-sr-only">Contact</span></a>
+                    <span class="tooltip-content tooltip-shown:opacity-100 tooltip-shown:visible" role="tooltip">
+                        <span class="tooltip-body">Contact</span>
+                    </span>
+                </li>
+            </ul>
+        </div>
+        <slot />
+    </body>
+</html>
+
+
+<script is:inline src="../node_modules/flyonui/flyonui.js"></script>

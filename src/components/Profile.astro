@@ -1,0 +1,46 @@
+---
+import { Image } from "astro:assets";
+import LinkIcon from "./LinkIcon.astro";
+---
+
+<div class="p-4 text-center">
+    <div id="profile">
+        <div class="avatar w-48">
+            <div class="rounded-full">
+                <Image
+                    src="https://avatars.githubusercontent.com/u/11707368?v=4"
+                    alt="hambergerpls"
+                    width={192}
+                    height={192}
+                    loading="eager"
+                />
+            </div>
+        </div>
+        <div class="font-bold text-2xl">Danial A. Hanif</div>
+        <div>Software/Network Engineer 🧑‍💻</div>
+    </div>
+
+    <p class="my-4">
+        Hi all! I'm <a class="link" href="https://x.com/hambergerpls" target="_blank"
+            >@hambergerpls</a
+        > (Danial) 🫡
+    </p>
+    <p class="my-4">Born and raised in Kuala Lumpur, Malaysia  🇲🇾</p>
+    <p class="my-4">Currently working as a Product Enginer @ <a class="link" href="https://carbongpt.ai" target="_blank">Carbon GPT</a>.</p>
+    <p class="my-4">
+        Creating softwares to solve challenging problems has always been something that I enjoy. 🧠
+    </p>
+    <p class="my-4">
+        Like getting that hard-to-reach remote you just dropped without leaving
+        your couch. 🥵
+    </p>
+
+    <div class="flex justify-center gap-4 m-4">
+        <LinkIcon href="https://github.com/hambergerpls" icon="icon-[tabler--brand-github]" ><span class="sr-only">Github<span></LinkIcon>
+        <LinkIcon
+            href="https://www.linkedin.com/in/danialaimanhanif"
+            icon="icon-[tabler--brand-linkedin]"
+        ><span class="sr-only">LinkedIn<span></LinkIcon>
+        <LinkIcon href="https://x.com/hambergerpls" icon="icon-[tabler--brand-x]" ><span class="sr-only">X<span></LinkIcon>
+    </div>
+</div>

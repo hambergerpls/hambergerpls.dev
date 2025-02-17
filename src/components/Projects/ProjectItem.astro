@@ -1,0 +1,82 @@
+---
+import TechBadge from "../TechBadge.astro";
+import { format } from "date-fns";
+import type { CollectionEntry } from "astro:content";
+import ProjectContent from "./ProjectContent.astro";
+import ProjectDetails from "./ProjectDetails.astro";
+
+type Props = {
+  entry: CollectionEntry<"projects">;
+  checked?: boolean;
+  position?: "start" | "end";
+};
+
+const { entry, position, checked: done } = Astro.props;
+
+const Link = entry.body || !entry.data.link ? "div" : "a";
+---
+<style is:global>
+.professional-project {
+  @apply group-has-[#filter-personal:checked]/projects:hidden;
+}
+
+.professional-project:nth-last-child(1 of .group\/projects:has(#filter-professional:checked):not(:has(#filter-personal:checked)) .professional-project) > hr {
+  @apply hidden;
+}
+
+.personal-project {
+  @apply group-has-[#filter-professional:checked]/projects:hidden;
+}
+
+.personal-project:nth-last-child(1 of .group\/projects:has(#filter-personal:checked):not(:has(#filter-professional:checked)) .personal-project) > hr {
+  @apply hidden;
+}
+</style>
+
+<li id=`project-${entry.id}` class:list={[{ "professional-project": entry.data.type === "professional", "personal-project": entry.data.type === "personal" }, "group-[:has(#filter-professional:checked):has(#filter-personal:checked)]/projects:grid" ]}>
+    { entry.body && <div id=`modal-${ entry.id }` class="overlay modal modal-middle overlay-open:opacity-100 hidden" role="dialog" tabindex="-1">
+        <div class="modal-dialog sm:max-w-[80vw] overlay-open:opacity-100">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="btn btn-text btn-circle btn-sm absolute end-3 top-3" aria-label="Close" data-overlay=`#modal-${ entry.id }` >
+                        <span class="icon-[tabler--x] size-4"/>
+                        <span class="sr-only">Close<span/>
+                    </button>
+                </div>
+                <div class="modal-body flex flex-col justify-start items-center xl:flex-row xl:items-start xl:justify-start w-full xl:h-[70vh]">
+                    <div class="flex-none xl:max-w-xs">
+                        <ProjectDetails entry={entry} />
+                    </div>
+                    <div class="divider sm:divider-horizontal flex-none" />
+                    <div class="grow h-full xl:vertical-scrollbar">
+                            <ProjectContent entry={entry} />
+                    </div>
+                </div>
+                <div class="modal-footer p-4">
+                    <button type="button" class="btn btn-soft btn-secondary" data-overlay=`#modal-${ entry.id }`>Close</button>
+                </div>
+            </div>
+        </div>
+    </div> }
+    <div class="timeline-middle">
+        <span class:list={ [ { "bg-primary/20": done, "bg-warning/20": !done }, "flex size-4.5 items-center justify-center rounded-full" ] }>
+            <span class:list={ [ {"badge-primary": done, "badge-warning": !done} ,"badge size-3 rounded-full p-0" ] }/>
+        </span>
+    </div>
+    <Link role="link" href={ entry.data.link ? entry.data.link : "#"} class:list={ [ "timeline-end mb-10 rounded-md w-full", { "hover:bg-base-200/50 hover:ring-[0.75rem] hover:ring-base-200/50 hover:cursor-pointer" : entry.data.link } ] } target="_blank" { ... entry.body ? { "data-overlay":`#modal-${ entry.id }` } : {} }>
+        <div>
+            <time class="font-mono italic text-sm">{format(entry.data.start_date!, "MMMM, yyyy" )}</time>
+            -
+            <time class="font-mono italic text-sm">{entry.data.end_date ? format(entry.data.end_date, "MMMM, yyyy" ) : "present"}</time>
+        </div>
+        <h3 class="text-lg font-black">
+            {entry.data.title}
+            { entry.data.client && <span class="badge badge-xs badge-primary">{entry.data.client}</span> }
+        </h3>
+        { entry.data.excerpt ? entry.data.excerpt : <slot/> }
+        <div class="mt-2">
+            {entry.data.technologies?.map(tech => <TechBadge tech={tech}/>)}
+        </div>
+    </Link>
+    { position !== 'end' && <hr />}
+</li>

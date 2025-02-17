@@ -1,0 +1,25 @@
+---
+import { getCollection, render } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import { removeNumberPrefixFromContentId } from "@/utils";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("posts");
+  return posts.map((entry) => ({
+    params: { slug: removeNumberPrefixFromContentId(entry.id) },
+    props: { entry },
+  }));
+}
+
+export const prerender = true;
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+<Layout title={entry.data.title}>
+    <main>
+        <div class="mx-auto p-4 sm:max-w-3xl">
+            <Content />
+        </div>
+    </main>
+</Layout>

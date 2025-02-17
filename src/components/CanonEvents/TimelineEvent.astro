@@ -1,0 +1,36 @@
+---
+import { removeNumberPrefixFromContentId, hashEntry } from "@/utils";
+import { format } from "date-fns";
+import type { CollectionEntry } from "astro:content";
+
+type Props = {
+  entry: CollectionEntry<"posts">;
+  checked?: boolean;
+  position?: "start" | "end";
+};
+
+const { entry, position, checked } = Astro.props;
+
+const hash = entry.filePath ? hashEntry(JSON.stringify(entry)) : undefined;
+
+const Link = entry.body ? "a" : "div";
+---
+
+<li id={entry.id}>
+    <div class="timeline-middle">
+        <span class:list={ [ { "bg-primary/20": checked, "bg-secondary/20": !checked }, "flex size-4.5 items-center justify-center rounded-full" ] }>
+            <span class:list={ [ {"badge-primary": checked, "badge-secondary": !checked} ,"badge size-3 rounded-full p-0" ] }/>
+        </span>
+    </div>
+    <Link href={ entry.body ? `/posts/${removeNumberPrefixFromContentId(entry.id)}` : "#"} class:list={ [ "timeline-end mb-10 rounded-md w-full", { "hover:bg-base-200/50 hover:ring-[0.75rem] hover:ring-base-200/50" : entry.body } ] }>
+        <div>
+            <span class="badge badge-sm font-mono text-sm">{ hash ? hash : '??????' }</span>
+            <time class="font-mono italic text-sm">{entry.data.canon_date ? format(entry.data.canon_date, "MMMM, yyyy" ) : 'TBD'}</time>
+        </div>
+        <div class="font-bold sm:text-lg">
+            {entry.data.title}
+        </div>
+        { entry.data.excerpt ? entry.data.excerpt : <slot/> }
+    </Link>
+    { position !== 'end' && <hr />}
+</li>

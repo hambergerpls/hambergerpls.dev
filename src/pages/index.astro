@@ -1,0 +1,19 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Profile from "../components/Profile.astro";
+import CanonEvents from "../components/CanonEvents/index.astro";
+---
+
+<Layout>
+    <main class="flex flex-col justify-center items-center sm:flex-row sm:items-start sm:justify-start w-full">
+        <div class="flex-none max-w-xs sm:col-span md:max-w-md">
+            <Profile />
+        </div>
+        <div class="divider sm:divider-horizontal flex-none" />
+        <div class="p-4 max-w-sm sm:grow sm:max-w-none">
+                <h2 class="text-xl font-bold sm:text-2xl">git log canon-events --pretty=format:"%h%x09%ad%x0a%s"</h2>
+                <br />
+                <CanonEvents />
+        </div>
+    </main>
+</Layout>

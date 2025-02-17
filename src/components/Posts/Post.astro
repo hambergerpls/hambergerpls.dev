@@ -1,0 +1,31 @@
+---
+import TechBadge from "../TechBadge.astro";
+import { format } from "date-fns";
+import type { CollectionEntry } from "astro:content";
+import { removeNumberPrefixFromContentId } from "@/utils";
+
+type Props = {
+  entry: CollectionEntry<"posts">;
+  checked?: boolean;
+  position?: "start" | "end";
+};
+
+const { entry, position } = Astro.props;
+
+const Link = entry.body ? "a" : "div";
+---
+
+<li id={entry.id}>
+    <Link href={`/posts/${removeNumberPrefixFromContentId(entry.id)}`} class="timeline-end mb-10 rounded-md w-full hover:bg-base-200/50 hover:ring-[0.75rem] hover:ring-base-200/50">
+        <div>
+            <time class="font-mono italic text-sm">{format(entry.data.published_at!, "MMMM, yyyy" )}</time>
+        </div>
+        <div class="text-lg font-black">
+            {entry.data.title}
+        </div>
+        { entry.data.excerpt ? entry.data.excerpt : <slot/> }
+        <div class="mt-2">
+            {entry.data.technologies?.map(tech => <TechBadge tech={tech}/>)}
+        </div>
+    </Link>
+</li>

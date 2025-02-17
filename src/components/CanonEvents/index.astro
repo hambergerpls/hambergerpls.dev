@@ -1,0 +1,46 @@
+---
+import { getCollection } from "astro:content";
+import TimelineEvent from "./TimelineEvent.astro";
+
+const posts = await getCollection("posts", ({ data }) => {
+  return data.canon_date !== undefined && !data.draft;
+});
+---
+
+<ul
+    class="timeline timeline-snap-icon timeline-compact timeline-vertical sm:max-w-3xl"
+>
+    { posts.sort((a, b) => a.data.canon_date!.getTime() - b.data.canon_date!.getTime()).map((e, index) => 
+    <TimelineEvent
+        entry={e}
+        checked={true}
+        position={index === 0 ? "start" : undefined}
+    />
+    ) }
+
+    <TimelineEvent
+        entry={{
+            id: "tbd",
+            collection: "posts",
+            data: {
+                title: "TBD",
+                excerpt: "TBD",
+                published_at: new Date("2025-02-12"),
+            }
+        }}
+    />
+
+    <TimelineEvent
+        entry={{
+            id: "end-goal",
+            collection: "posts",
+            data: {
+                title: "Start a farm",
+                excerpt: "To retire and to live a meaningful life.",
+                published_at: new Date("2025-02-12"),
+                canon_date: new Date("2038-01-01")
+            }
+        }}
+        position={"end"}
+    />
+</ul>

@@ -1,0 +1,36 @@
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: [
+    "./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}",
+    "./node_modules/flyonui/dist/js/*.js",
+  ],
+  theme: {
+    colors: {
+      "brand-astro": "#e23f97",
+      "brand-bootstrap": "#742bf2",
+      "brand-codeigniter": "#EE4323",
+      "brand-cpp": "#f04a7d",
+      "brand-cloudflare": "#f2822a",
+      "brand-dart": "#00B4AB",
+      "brand-django": "#114b34",
+      "brand-fastapi": "#1a9485",
+      "brand-flutter": "#58d1fb",
+      "brand-go": "#00ADD8",
+      "brand-java": "#E76F00",
+      "brand-js": "#F0DB4F",
+      "brand-mysql": "#18758e",
+      "brand-php": "#777BB4",
+      "brand-postgresql": "#396790",
+      "brand-python": "#FFD43B",
+      "brand-ruby": "#CC342D",
+      "brand-rust": "#000000",
+      "brand-stripe": "#6a5afc",
+      "brand-supabase": "#46cf90",
+      "brand-ts": "#007ACC",
+      "brand-tailwindcss": "#22bcfe",
+      "brand-wordpress": "#21759B",
+    },
+    extend: {},
+  },
+  plugins: [require("flyonui"), require("flyonui/plugin")],
+};

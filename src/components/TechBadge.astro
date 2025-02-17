@@ -1,0 +1,41 @@
+---
+import type { CollectionEntry } from "astro:content";
+import type { technologies } from "@/content.config";
+import type { z } from "astro:content";
+
+export interface Props {
+  tech: Required<CollectionEntry<"projects">["data"]>["technologies"][number];
+}
+
+const { tech } = Astro.props;
+
+const classes: { [key in Exclude< z.infer<typeof technologies>, undefined>[number]]: string } = {
+  astro: "before:bg-brand-astro",
+  bootstrap: "before:bg-brand-bootstrap",
+  codeigniter: "before:bg-brand-codeigniter",
+  cpp: "before:bg-brand-cpp",
+  cloudflare: "before:bg-brand-cloudflare",
+  dart: "before:bg-brand-dart",
+  django: "before:bg-brand-django",
+  flutter: "before:bg-brand-flutter",
+  fastapi: "before:bg-brand-fastapi",
+  go: "before:bg-brand-go",
+  java: "before:bg-brand-java",
+  js: "before:bg-brand-js",
+  mysql: "before:bg-brand-mysql",
+  php: "before:bg-brand-php",
+  postgresql: "before:bg-brand-postgresql",
+  python: "before:bg-brand-python",
+  ruby: "before:bg-brand-ruby",
+  rust: "before:bg-brand-rust",
+  stripe: "before:bg-brand-stripe",
+  supabase: "before:bg-brand-supabase",
+  ts: "before:bg-brand-ts",
+  tailwindcss: "before:bg-brand-tailwindcss",
+  wordpress: "before:bg-brand-wordpress",
+};
+---
+
+<span class:list={ [ "before:badge before:badge-sm before:rounded-tr-none before:rounded-br-none before:inline before:pr-0", classes[tech] ] }>
+    <span class:list={[ "badge badge-soft badge-sm inline rounded-tl-none rounded-bl-none" ]}>{ tech }</span>
+</span>
