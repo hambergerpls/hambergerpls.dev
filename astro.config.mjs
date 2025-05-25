@@ -1,18 +1,15 @@
+// @ts-check
 import { defineConfig } from "astro/config";
 
-import tailwind from "@astrojs/tailwind";
+import tailwindcss from "@tailwindcss/vite";
+
 import markdoc from "@astrojs/markdoc";
 
 // https://astro.build/config
 export default defineConfig({
-  output: "static",
-  prefetch: true,
   vite: {
-    server: {
-      watch: {
-        usePolling: true,
-      },
-    },
+    plugins: [tailwindcss()],
   },
-  integrations: [tailwind(), markdoc()],
+
+  integrations: [markdoc()],
 });
