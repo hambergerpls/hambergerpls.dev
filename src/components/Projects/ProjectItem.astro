@@ -15,9 +15,9 @@ const { entry, position, checked: done } = Astro.props;
 
 const Link = entry.body || !entry.data.link ? "div" : "a";
 ---
-<style is:global>
+<style>
 .professional-project {
-  @apply group-has-[#filter-personal:checked]/projects:hidden;
+  @apply group-[:has(#filter-personal:checked):not(:has(#filter-professional:checked))]/projects:hidden;
 }
 
 .professional-project:nth-last-child(1 of .group\/projects:has(#filter-professional:checked):not(:has(#filter-personal:checked)) .professional-project) > hr {
@@ -25,7 +25,7 @@ const Link = entry.body || !entry.data.link ? "div" : "a";
 }
 
 .personal-project {
-  @apply group-has-[#filter-professional:checked]/projects:hidden;
+  @apply group-[:has(#filter-professional:checked):not(:has(#filter-personal:checked))]/projects:hidden;
 }
 
 .personal-project:nth-last-child(1 of .group\/projects:has(#filter-personal:checked):not(:has(#filter-professional:checked)) .personal-project) > hr {
@@ -33,7 +33,7 @@ const Link = entry.body || !entry.data.link ? "div" : "a";
 }
 </style>
 
-<li id=`project-${entry.id}` class:list={[{ "professional-project": entry.data.type === "professional", "personal-project": entry.data.type === "personal" }, "group-[:has(#filter-professional:checked):has(#filter-personal:checked)]/projects:grid" ]}>
+<li id=`project-${entry.id}` class:list={[{ "professional-project": entry.data.type === "professional", "personal-project": entry.data.type === "personal" } ]}>
     { entry.body && <div id=`modal-${ entry.id }` class="overlay modal modal-middle overlay-open:opacity-100 hidden" role="dialog" tabindex="-1">
         <div class="modal-dialog sm:max-w-[80vw] overlay-open:opacity-100">
             <div class="modal-content">

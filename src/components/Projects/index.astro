@@ -2,8 +2,9 @@
 import { getCollection } from "astro:content";
 import ProjectItem from "./ProjectItem.astro";
 
-const projects = ( await getCollection("projects") ).sort((a, b) => a.data.start_date!.getTime() - b.data.start_date!.getTime());
-
+const projects = (await getCollection("projects")).sort(
+  (a, b) => a.data.start_date!.getTime() - b.data.start_date!.getTime(),
+);
 ---
 <div class="group/projects">
     <div class="flex gap-4 mb-2">
@@ -17,7 +18,7 @@ const projects = ( await getCollection("projects") ).sort((a, b) => a.data.start
         </div>
     </div>
 <ul
-        class="group/projectlist timeline timeline-snap-icon timeline-compact timeline-vertical sm:max-w-3xl"
+        class="timeline timeline-snap-icon timeline-compact timeline-vertical sm:max-w-3xl"
 >
         { [ ...projects.filter((e) => e.data.end_date), ...projects.filter((e) => !e.data.end_date) ].map((e, index) => 
     <ProjectItem
