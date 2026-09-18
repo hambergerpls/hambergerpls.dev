@@ -1,7 +1,7 @@
 import { createHash } from "node:crypto";
 
 export function removeNumberPrefixFromContentId(id: string) {
-  return id.replace(/\d+-/gm, "");
+  return id.replace(/^\d+-/, "");
 }
 
 export function hashEntry(entry: string) {
