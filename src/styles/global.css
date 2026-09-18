@@ -10,11 +10,14 @@
   --color-*: initial;
   --color-brand-astro: #e23f97;
   --color-brand-bootstrap: #742bf2;
+  --color-brand-bun: #e4cfa9;
   --color-brand-codeigniter: #ee4323;
   --color-brand-cpp: #f04a7d;
   --color-brand-cloudflare: #f2822a;
   --color-brand-dart: #00b4ab;
   --color-brand-django: #114b34;
+  --color-brand-drizzle: #a7d32c;
+  --color-brand-effect: #5b5bd6;
   --color-brand-fastapi: #1a9485;
   --color-brand-flutter: #58d1fb;
   --color-brand-go: #00add8;
@@ -23,8 +26,10 @@
   --color-brand-java: #e76f00;
   --color-brand-js: #f0db4f;
   --color-brand-mysql: #18758e;
+  --color-brand-neon: #00b478;
   --color-brand-nextjs: #000000;
   --color-brand-php: #777bb4;
+  --color-brand-playwright: #2ead33;
   --color-brand-postgresql: #396790;
   --color-brand-python: #ffd43b;
   --color-brand-react: #61c4db;
@@ -33,8 +38,11 @@
   --color-brand-rust: #000000;
   --color-brand-stripe: #6a5afc;
   --color-brand-supabase: #46cf90;
+  --color-brand-svelte: #ff3e00;
+  --color-brand-sveltekit: #ff3e00;
   --color-brand-ts: #007acc;
   --color-brand-tailwindcss: #22bcfe;
+  --color-brand-vitest: #fcc72b;
   --color-brand-wordpress: #21759b;
 }
 
